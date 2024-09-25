@@ -60,13 +60,14 @@ tmp_data = data.frame(exp=expr, group = factor(rep(c("case","control"),c(25,20))
 tmp_res = coin::oneway_test(exp~group, data = tmp_data, alternative = "two.sided")
 p_value = coin::pvalue(tmp_res)
 ```
+
 ```R
 # 自己造轮子，仅示例
 d <- as.data.frame(cbind(rnorm(1:20, 500, 50), c(rep(0, 10), rep(1, 10))))
 treatment <- d$V2
 outcome <- d$V1
 
-#Difference in means
+# Difference in means
 # diff(x, lags = 1)函数计算 x中间隔lags-1的两项差值，所以lags=1表示计算相邻两项差值（后项-前项）
 original <- diff(tapply(outcome, treatment, mean))
 mean(outcome[treatment==1])-mean(outcome[treatment==0])
